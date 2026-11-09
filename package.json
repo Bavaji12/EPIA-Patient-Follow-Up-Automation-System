@@ -1,0 +1,29 @@
+{
+  "name": "epia-patient-followup-system",
+  "version": "1.0.0",
+  "description": "Production-grade Patient Follow-Up Automation System with AI Message Generation and Human Supervision for EPIA Technical Assessment",
+  "scripts": {
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "seed": "cd backend && npm run seed",
+    "test": "cd backend && npm test",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "epia",
+    "healthcare",
+    "patient-followup",
+    "automation",
+    "gemini",
+    "sqlite",
+    "react",
+    "express"
+  ],
+  "author": "Senior Full-Stack & AI Engineer - EPIA Candidate",
+  "license": "ISC"
+}
+

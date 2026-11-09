@@ -1,0 +1,292 @@
+{
+  "info": {
+    "_postman_id": "b3e0c7a1-893d-4c3e-8e54-epia00112233",
+    "name": "EPIA Patient Follow-Up Automation API",
+    "description": "Comprehensive REST API test collection for the EPIA Patient Follow-Up Automation System assessment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Dashboard Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/dashboard/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dashboard", "stats"]
+        }
+      }
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "Register New Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rohan Varma\",\n  \"phone\": \"+91 98765 11223\",\n  \"consultation_date\": \"2026-11-09\",\n  \"next_follow_up_date\": \"2026-11-16\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients"]
+            }
+          }
+        },
+        {
+          "name": "Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients?status=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Due Today Patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/due-today",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "due-today"]
+            }
+          }
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ananya Sharma Updated\",\n  \"phone\": \"+91 98765 43210\",\n  \"consultation_date\": \"2026-11-06\",\n  \"next_follow_up_date\": \"2026-11-12\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "1"]
+            }
+          }
+        },
+        {
+          "name": "Mark Follow-Up Completed",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/1/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "1", "complete"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Automation",
+      "item": [
+        {
+          "name": "Generate Draft (Single Patient)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 2,\n  \"force\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/generate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Batch Generate Due Today Drafts",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"force\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/generate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Get All Drafts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/drafts?status=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "drafts"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Edit Draft Message",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hello Rajesh, this is an edited friendly reminder from the clinic care coordinator regarding your follow-up today. Please contact us if you need help!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/drafts/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "drafts", "1"]
+            }
+          }
+        },
+        {
+          "name": "Approve Draft (Strict: No WhatsApp Sent)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/drafts/1/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "drafts", "1", "approve"]
+            }
+          }
+        },
+        {
+          "name": "Reject Draft",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Requires doctor revision\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/automation/drafts/1/reject",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automation", "drafts", "1", "reject"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Logs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/activity-logs?limit=50",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "activity-logs"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "50"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "System Settings & Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/settings",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "settings"]
+        }
+      }
+    }
+  ]
+}
+
